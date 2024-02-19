@@ -1,33 +1,39 @@
 # building.py
 
 import sys
-from breakdown import StringBreakdown
+import string
 
+def count_characters(text):
+    char_count = len(text)
+    
+    upper_count = sum(bool(char.isupper()) for char in text)
+    lower_count = sum(bool(char.islower()) for char in text)
+    punct_count = sum(char in string.punctuation for char in text)
+    space_count = sum(bool(char.isspace()) for char in text)
+    digit_count = sum(bool(char.isdigit()) for char in text)
 
-def main():
-    """
-    Main function to run the script.
+    print(f"The text contains {char_count} characters:")
+    print(f"{upper_count} upper letters")
+    print(f"{lower_count} lower letters")
+    print(f"{punct_count} punctuation marks")
+    print(f"{space_count} spaces")
+    print(f"{digit_count} digits")
 
-    If a command-line argument is provided, it is used
-    as the input string to be analyzed. If no command-line
-    argument is provided, the user is prompted to enter
-    an input string.
-
-    The input string is then analyzed and the results
-    are printed to the console.
-
-    Returns:
-    None
-    """
-    if len(sys.argv) > 2:
-        print("AssertionError: more than one argument is provided")
-        sys.exit(1)
-    if len(sys.argv) == 2:
-        breakdown = StringBreakdown(sys.argv[1])
+if __name__ == "__main__":
+    try:
+        text = sys.argv[1]
+    except IndexError:
+        try:
+            print("What is the text to count?")
+            text = sys.stdin.readline()
+            if not text:
+                sys.exit(0)
+            count_characters(text)
+        except KeyboardInterrupt as e:
+            print(f'KeyboardInterrupt: {e}')
+            sys.exit(1)
     else:
-        breakdown = StringBreakdown()
-    print(breakdown)
-
-
-if __name__ == '__main__':
-    main()
+        count_characters(text)
+        sys.exit(0)
+    
+    
