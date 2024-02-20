@@ -2,22 +2,31 @@
 
 import sys
 import string
+from collections import Counter
 
-def count_characters(text):
+
+def count_characters(text: str) -> None:
+    '''
+    This function counts the number of characters in a text.
+    It also counts the number of upper and lower letters,
+    punctuation marks, spaces and digits.
+    '''
+    char_types = {
+        'upper letters': lambda c: c.isupper(),
+        'lower letters': lambda c: c.islower(),
+        'punctuation marks': lambda c: c in string.punctuation,
+        'spaces': lambda c: c.isspace(),
+        'digits': lambda c: c.isdigit(),
+    }
+
+    counts = Counter({char_type: sum(map(checker, text))
+                      for char_type, checker in char_types.items()})
     char_count = len(text)
-    
-    upper_count = sum(bool(char.isupper()) for char in text)
-    lower_count = sum(bool(char.islower()) for char in text)
-    punct_count = sum(char in string.punctuation for char in text)
-    space_count = sum(bool(char.isspace()) for char in text)
-    digit_count = sum(bool(char.isdigit()) for char in text)
 
     print(f"The text contains {char_count} characters:")
-    print(f"{upper_count} upper letters")
-    print(f"{lower_count} lower letters")
-    print(f"{punct_count} punctuation marks")
-    print(f"{space_count} spaces")
-    print(f"{digit_count} digits")
+    for char_type, count in counts.items():
+        print(f"{count} {char_type}")
+
 
 if __name__ == "__main__":
     try:
@@ -27,6 +36,7 @@ if __name__ == "__main__":
             print("What is the text to count?")
             text = sys.stdin.readline()
             if not text:
+                print("No text to count. Exiting.")
                 sys.exit(0)
             count_characters(text)
         except KeyboardInterrupt as e:
@@ -35,5 +45,3 @@ if __name__ == "__main__":
     else:
         count_characters(text)
         sys.exit(0)
-    
-    
