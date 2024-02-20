@@ -44,7 +44,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Author
 fsalazar - fsalazar@42.f
 
-## To Build a Package
+## To Build a Package or Re build
 If you want to build your own package
 - python3 setup.py sdist bdist_wheel
 
