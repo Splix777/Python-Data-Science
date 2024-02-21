@@ -13,9 +13,8 @@ def main():
     income_df = load("income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
     life_df = load("life_expectancy_years.csv")
 
-    column_1900 = '1900'
-    gdp_1900 = income_df[column_1900]
-    life_expectancy_1900 = life_df[column_1900]
+    gdp_1900 = income_df['1900']
+    life_expectancy_1900 = life_df['1900']
     
     plt.figure(figsize=(10, 6))
     plt.scatter(gdp_1900, life_expectancy_1900)
