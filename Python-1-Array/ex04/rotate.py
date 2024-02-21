@@ -1,4 +1,4 @@
-# zoom.py
+# rotate.py
 
 
 import numpy as np
@@ -10,7 +10,8 @@ def main():
     '''
     Prints the shape of an image and displays the image
     it then slices a portion of the image and prints the new shape
-    and displays the new zoomed image
+    and displays the new rotated image, we can rotate the image by
+    90, 180, 270 degrees
 
     Args:
     None
@@ -26,18 +27,16 @@ def main():
         if image is None:
             raise FileNotFoundError(f"Error: File not found - {image}")
 
-        _print_img_info(
-            "The shape of image is:",
-            image,
-            "Original Image")
+        _print_img_info("The shape of image is:", image, "Original Image")
 
-        # Zoom into the image (slicing a portion)
         zoomed_image = image[:400, :400, :1]
 
+        # Manually transpose the image
+        transposed_image = manual_transpose(zoomed_image, rotate=270)
+
         _print_img_info(
-            "New shape after slicing:",
-            zoomed_image,
-            "Zoomed Image")
+            "New shape after Transpose:",
+            transposed_image, "Manually Transposed Image")
 
     except Exception as e:
         print(f"Error: {e}")
@@ -67,6 +66,35 @@ def _print_img_info(message: str, img: np.array, title: str) -> None:
         plt.show()
     except Exception as e:
         print(f"Error displaying image: {e}")
+
+
+def manual_transpose(image: np.array, rotate: int) -> np.array:
+    '''
+    Takes in an image and returns the transposed image. We
+    rotate the image by 90, 180, 270 degrees depending on the
+    value of rotate. If rotate is not 90, 180, 270, we return
+    the original image
+
+    Args:
+    image: numpy array
+
+    Returns:
+    numpy array
+    '''
+    if rotate in {90, 270}:
+        transposed_image = np.zeros((
+            image.shape[1],
+            image.shape[0],
+            image.shape[2]),
+            dtype=image.dtype)
+        for i in range(image.shape[0]):
+            for j in range(image.shape[1]):
+                if rotate == 270:
+                    transposed_image[j, i] = image[i, image.shape[1] - j - 1]
+                elif rotate == 90:
+                    transposed_image[j, i] = image[image.shape[0] - i - 1, j]
+
+        return transposed_image
 
 
 if __name__ == "__main__":

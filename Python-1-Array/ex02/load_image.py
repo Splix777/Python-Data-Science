@@ -30,10 +30,14 @@ def ft_load(path: str) -> list:
     [ 1 1 1]]]
     '''
     try:
+        if not path.endswith('.jpg') and not path.endswith('.jpeg'):
+            raise ValueError('File is not a .jpg or .jpeg file')
+
         # Try to load the image
         img = Image.open(os.path.join(os.path.dirname(__file__), path))
 
         print(f'The shape of the image is: {np.array(img).shape}')
+        print(np.array(img))
         return np.array(img)
     except (FileNotFoundError, ValueError) as e:
         # If the file is not found, print the error and return an empty list
