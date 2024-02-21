@@ -4,72 +4,75 @@ class calculator:
     A calculator class for performing arithmetic operations between
     a vector and a object. We overload the +, *, - and / operators.
 
-    Calculations (dot product, addition, subtraction) are performed
-    on two vectors. The vectors are lists of numbers.
-
-    Decorators:
-        @staticmethod
-        - A method that does not require access to the instance or class.
-        - It does not modify the state of the class or instance
-        - We do not need to instantiate the class to use the method.
-
     Attributes:
         vector (list): The vector on which operations will be performed.
-        
+
     Methods:
-        dotproduct(self, V1: list[float], V2: list[float]) -> None
-        - Calculate the dot product of two vectors.
-        
-        add_vec(self, V1: list[float], V2: list[float]) -> None
-        - Add two vectors.
-        
-        sous_vec(self, V1: list[float], V2: list[float]) -> None
-        - Subtract two vectors.
+        __init__(self, vector): Init the calculator with the provided vector.
+
+        __add__(self, object): + a object value to each element of the vec.
+
+        __mul__(self, object): * each element of the vector by a object value.
+
+        __sub__(self, object): - a object value from each element of the vector
+
+        __truediv__(self, object): / each element of the vector by a object val
     """
-    @staticmethod
-    def dotproduct(V1: list[float], V2: list[float]) -> None:
+
+    def __init__(self, vector: list) -> None:
         """
-        Calculate the dot product of two vectors.
+        Initializes the calculator with the provided vector.
 
         Args:
-            V1 (list[float]): The first vector.
-            V2 (list[float]): The second vector.
+            vector (list): The vector on which operations will be performed.
+        """
+        self.vector = vector
 
+    def __add__(self, object) -> None:
+        """
         Returns:
-            The dot product of the two vectors.
+            The resulting vector after addition.
         """
-        dot_product = sum(x * y for x, y in zip(V1, V2))
-        print(f'Dot product is: {dot_product}')
-        return dot_product
-    
-    @staticmethod
-    def add_vec(V1: list[float], V2: list[float]) -> None:
+        self.vector = [x + object for x in self.vector]
+        print(self.vector)
+        return list(self.vector)
+
+    def __mul__(self, object) -> None:
         """
-        Add two vectors.
-
-        Args:
-            V1 (list[float]): The first vector.
-            V2 (list[float]): The second vector.
-
         Returns:
-            The sum of the two vectors.
+            The resulting vector after multiplication.
         """
-        sum_vec = [x + y for x, y in zip(V1, V2)]
-        print(f'Add Vector is: {sum_vec}')
-        return sum_vec
-    
-    @staticmethod
-    def sous_vec(V1: list[float], V2: list[float]) -> None:
+        self.vector = [x * object for x in self.vector]
+        print(self.vector)
+        return list(self.vector)
+
+    def __sub__(self, object) -> None:
         """
-        Subtract two vectors.
-
-        Args:
-            V1 (list[float]): The first vector.
-            V2 (list[float]): The second vector.
-
         Returns:
-            The difference of the two vectors.
+            The resulting vector after subtraction.
         """
-        diff_vec = [x - y for x, y in zip(V1, V2)]
-        print(f'Subtract Vector is: {diff_vec}')
-        return diff_vec
+        self.vector = [x - object for x in self.vector]
+        print(self.vector)
+        return list(self.vector)
+
+    def __truediv__(self, object) -> None:
+        """
+        Returns:
+            The resulting vector after division.
+            None if the object value is 0 or an exception is raised.
+
+        Raises:
+            ZeroDivisionError: If the object value is 0.
+        """
+        try:
+            if object == 0:
+                raise ZeroDivisionError("Division by zero is not allowed.")
+            self.vector = [x / object for x in self.vector]
+            print(self.vector)
+            return list(self.vector)
+        except ZeroDivisionError as e:
+            print(f"{ZeroDivisionError.__name__}:", e)
+            return None
+        except Exception as e:
+            print(f"{Exception.__name__}:", e)
+            return None
