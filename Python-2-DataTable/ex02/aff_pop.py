@@ -79,6 +79,7 @@ def main():
             'Germany',
             'Italy',
             'United Kingdom',
+            'Malaysia',
             'Not a real country',
             ]
 
