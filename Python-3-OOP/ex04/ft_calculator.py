@@ -15,14 +15,14 @@ class calculator:
 
     Attributes:
         vector (list): The vector on which operations will be performed.
-        
+
     Methods:
         dotproduct(self, V1: list[float], V2: list[float]) -> None
         - Calculate the dot product of two vectors.
-        
+
         add_vec(self, V1: list[float], V2: list[float]) -> None
         - Add two vectors.
-        
+
         sous_vec(self, V1: list[float], V2: list[float]) -> None
         - Subtract two vectors.
     """
@@ -41,7 +41,7 @@ class calculator:
         dot_product = sum(x * y for x, y in zip(V1, V2))
         print(f'Dot product is: {dot_product}')
         return dot_product
-    
+
     @staticmethod
     def add_vec(V1: list[float], V2: list[float]) -> None:
         """
@@ -57,7 +57,7 @@ class calculator:
         sum_vec = [x + y for x, y in zip(V1, V2)]
         print(f'Add Vector is: {sum_vec}')
         return sum_vec
-    
+
     @staticmethod
     def sous_vec(V1: list[float], V2: list[float]) -> None:
         """
