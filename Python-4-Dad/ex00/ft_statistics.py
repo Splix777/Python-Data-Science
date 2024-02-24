@@ -21,8 +21,8 @@ def ft_statistics(*args: any, **kwargs: any) -> None:
             "quartile": (vec[len(vec) // 4], vec[len(vec) // 4 * 3]),
             "var": sum((x - sum(vec) / len(vec)) ** 2 for x in vec) / len(vec),
             "std": (
-                (sum((x - sum(vec) / len(vec)) ** 2 for x in vec) / len(vec))
-                ** 0.5
+                    (sum((x - sum(vec) / len(vec)) ** 2 for x in vec) / len(vec))
+                    ** 0.5
             ),
         }
     except ZeroDivisionError:
@@ -38,7 +38,23 @@ def ft_statistics(*args: any, **kwargs: any) -> None:
     return
 
 
-def main():
+def main(*args: any, **kwargs):
+    """
+    Calculates statistics based on the given arguments.
+
+    Args:
+        *args: Numeric values to calculate statistics on.
+        **kwargs: Additional keyword arguments for specifying the type of statistics to calculate.
+
+    Returns:
+        None
+
+    Examples:
+        ft_statistics(1, 42, 360, 11, 64, toto="mean", tutu="median", tata="quartile")
+        ft_statistics(5, 75, 450, 18, 597, 27474, 48575, hello="std", world="var")
+        ft_statistics(5, 75, 450, 18, 597, 27474, 48575, ejfhhe="heheh", ejdjdejn="kdekem")
+        ft_statistics(toto="mean", tutu="median", tata="quartile")
+    """
     ft_statistics(1, 42, 360, 11, 64,
                   toto="mean",
                   tutu="median",
