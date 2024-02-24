@@ -9,19 +9,19 @@ def ft_statistics(*args: any, **kwargs: any) -> None:
     if args is None:
         print("ERROR")
         return
-    vec = list(args)
+    vc = list(args)
     try:
         statistics_available = {
-            "mean": sum(vec) / len(vec),
+            "mean": sum(vc) / len(vc),
             "median": (
-                vec[len(vec) // 2]
-                if len(vec) % 2
-                else (vec[len(vec) // 2] + vec[len(vec) // 2 - 1]) / 2
+                vc[len(vc) // 2]
+                if len(vc) % 2
+                else (vc[len(vc) // 2] + vc[len(vc) // 2 - 1]) / 2
             ),
-            "quartile": (vec[len(vec) // 4], vec[len(vec) // 4 * 3]),
-            "var": sum((x - sum(vec) / len(vec)) ** 2 for x in vec) / len(vec),
+            "quartile": (vc[len(vc) // 4], vc[len(vc) // 4 * 3]),
+            "var": sum((x - sum(vc) / len(vc)) ** 2 for x in vc) / len(vc),
             "std": (
-                    (sum((x - sum(vec) / len(vec)) ** 2 for x in vec) / len(vec))
+                    (sum((x - sum(vc) / len(vc)) ** 2 for x in vc) / len(vc))
                     ** 0.5
             ),
         }
@@ -44,16 +44,11 @@ def main(*args: any, **kwargs):
 
     Args:
         *args: Numeric values to calculate statistics on.
-        **kwargs: Additional keyword arguments for specifying the type of statistics to calculate.
+        **kwargs: Additional keyword arguments for specifying
+        the type of statistics to calculate.
 
     Returns:
         None
-
-    Examples:
-        ft_statistics(1, 42, 360, 11, 64, toto="mean", tutu="median", tata="quartile")
-        ft_statistics(5, 75, 450, 18, 597, 27474, 48575, hello="std", world="var")
-        ft_statistics(5, 75, 450, 18, 597, 27474, 48575, ejfhhe="heheh", ejdjdejn="kdekem")
-        ft_statistics(toto="mean", tutu="median", tata="quartile")
     """
     ft_statistics(1, 42, 360, 11, 64,
                   toto="mean",
