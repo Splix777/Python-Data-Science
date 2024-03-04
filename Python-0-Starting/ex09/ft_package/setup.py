@@ -10,14 +10,9 @@ setup(
     author_email='fsalazar@42.fr',
     license='MIT',
     description='A sample test package',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     classifiers=[
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
     ],
 )
