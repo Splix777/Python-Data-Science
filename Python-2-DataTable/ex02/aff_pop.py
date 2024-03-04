@@ -1,11 +1,13 @@
 # aff_pop.py
 
 import matplotlib.pyplot as plt
+
+from pandas import DataFrame
 from load_csv import load
 
 
 def proc_data(population_data):
-    '''
+    """
     Processes the population string and returns
     the population as an integer.
 
@@ -14,7 +16,7 @@ def proc_data(population_data):
 
     Returns:
     population: float of population data
-    '''
+    """
     if population_data.endswith('B'):
         return float(population_data[:-1]) * 1_000_000_000
     elif population_data.endswith('M'):
@@ -25,8 +27,8 @@ def proc_data(population_data):
         return float(population_data)
 
 
-def plot_population_projections(df, countries):
-    '''
+def plot_population_projections(df: DataFrame, countries: list[str]) -> None:
+    """
     Plots the population projections for the specified countries.
 
     Args:
@@ -35,7 +37,7 @@ def plot_population_projections(df, countries):
 
     Returns:
     None
-    '''
+    """
     try:
         max_population = 0
         for country in countries:

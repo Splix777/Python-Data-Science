@@ -32,7 +32,6 @@ def ft_statistics(*args: any, **kwargs: any) -> None:
     for value in kwargs.values():
         if value not in statistics_available:
             print("ERROR")
-            return
         else:
             print(f"{value}: {statistics_available[value]}")
     return

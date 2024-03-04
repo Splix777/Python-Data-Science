@@ -20,21 +20,17 @@ class King(Baratheon, Lannister):
         get_hairs(): Returns the color of the King's hair.
     """
 
-    def __init__(self, name):
+    def __init__(self, first_name):
         """
         Initializes a new instance of the class.
 
         Args:
             self: The instance of the class.
-            name (str): The name of the instance.
-
-        Attributes:
-            _eyes (str): The color of the eyes.
-            _hairs (str): The color of the hair.
+            first_name (str): The name of the instance.
         """
-        super().__init__(name)
-        self._eyes = "green"
-        self._hairs = "black"
+        super().__init__(first_name)
+        self.eyes = "green"
+        self.hair = "black"
 
     def __str__(self):
         """
@@ -54,7 +50,7 @@ class King(Baratheon, Lannister):
             self: The instance of the class.
             color: The color to set for the eyes.
         """
-        self._eyes = color
+        self.eyes = color
 
     def set_hairs(self, color):
         """
@@ -64,7 +60,7 @@ class King(Baratheon, Lannister):
             self: The instance of the class.
             color: The color to set for the hair.
         """
-        self._hairs = color
+        self.hair = color
 
     def get_eyes(self):
         """
@@ -76,7 +72,7 @@ class King(Baratheon, Lannister):
         Returns:
             The color of the eyes.
         """
-        return self._eyes
+        return self.eyes
 
     def get_hairs(self):
         """
@@ -88,4 +84,4 @@ class King(Baratheon, Lannister):
         Returns:
             The color of the hair.
         """
-        return self._hairs
+        return self.hair

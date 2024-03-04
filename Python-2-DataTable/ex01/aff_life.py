@@ -6,8 +6,30 @@ import matplotlib.pyplot as plt
 from load_csv import load
 
 
+def draw_line_graph(data, title, x_label, y_label, x_ticks):
+    """
+    Function that draws a line graph using the data provided.
+
+    Args:
+    data: list
+    title: str
+    x_label: str
+    y_label: str
+    x_ticks: list
+
+    Returns:
+    None
+    """
+    plt.plot(data)
+    plt.title(title)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.xticks(range(0, len(data), 40), x_ticks)
+    plt.show()
+
+
 def main():
-    '''
+    """
     Program that calls the load function from load_csv.py. Loads
     a csv file and displays the country information of the country
     the users campus is located in. We will then display the
@@ -33,18 +55,19 @@ def main():
 
     Returns:
     None
-    '''
+    """
     try:
         df = load('life_expectancy_years.csv')
         spain_data = df[df['country'] == 'Spain']
         years = np.arange(1800, 2100, 40)
 
-        plt.plot(spain_data.iloc[0, 1:])
-        plt.title('Spain Life expectancy Projections')
-        plt.xlabel('Year')
-        plt.ylabel('Life Expectancy')
-        plt.xticks(range(0, len(spain_data.columns[1:]), 40), years)
-        plt.show()
+        draw_line_graph(
+            spain_data.iloc[0, 2:].tolist(),
+            'Life Expectancy in Spain',
+            'Year',
+            'Life Expectancy',
+            years
+        )
 
     except FileNotFoundError as e:
         print(f'File not found: {e}')

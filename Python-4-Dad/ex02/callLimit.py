@@ -26,8 +26,7 @@ def call_limit(limit: int):
             if count < limit:
                 count += 1
                 return function(*args, **kwargs)
-            else:
-                print(f'Error: {function} call too many times')
+            print(f'Error: {function} call too many times')
             return None
         return limit_function
 

@@ -7,15 +7,15 @@ import numpy as np
 
 
 def main():
-    '''
+    """
 
-    '''
+    """
     income_df = load("income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
     life_df = load("life_expectancy_years.csv")
 
     gdp_1900 = income_df['1900']
     life_expectancy_1900 = life_df['1900']
-    
+
     plt.figure(figsize=(10, 6))
     plt.scatter(gdp_1900, life_expectancy_1900)
     plt.title('Life Expectancy vs GDP in 1900')
@@ -26,7 +26,6 @@ def main():
     plt.grid(True)
     plt.tight_layout()
     plt.show()
-
 
 
 if __name__ == "__main__":
