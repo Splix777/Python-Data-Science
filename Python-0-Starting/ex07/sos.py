@@ -4,10 +4,10 @@ import sys
 
 
 def create_morse_code_dict() -> dict[str, str]:
-    '''
+    """
     Creates a dictionary of alphanumeric keys and
     their corresponding morse code translation as a value.
-    '''
+    """
     return {
         " ": "/",
         "A": ".-",
@@ -49,43 +49,33 @@ def create_morse_code_dict() -> dict[str, str]:
     }
 
 
-def is_valid_input(char: str) -> bool:
-    '''
-    Takes a char and checks if the char in uppercase exists
-    in the morse code dictionary or is a space.
-
-    Returns a bool if the char is valid
-    '''
-    valid_characters = set(create_morse_code_dict().keys())
-    return char.upper() in valid_characters or char.isspace()
-
-
-def main(input_string: str) -> None:
-    '''
+def text_to_morse(input_string: str) -> str | None:
+    """
     Takes in a input string and prints out its corresponding
     morse code.
 
-    If there are non alphanumeric values in the string it
+    If there are non-alphanumeric values in the string it
     returns an AssertionError.
-    '''
-    if not all(is_valid_input(char) for char in input_string):
-        print("AssertionError: the input string is bad")
-        sys.exit(1)
-
+    """
     morse_code_dict = create_morse_code_dict()
 
-    morse_code_list = [
-        morse_code_dict.get(letter.upper())
-        for letter in input_string
-        if letter.upper() in morse_code_dict.keys() or letter.isspace()
-    ]
+    if not all(
+        char.isalnum() or char.isspace() for char in input_string
+    ):
+        raise AssertionError
 
-    result_string = ' '.join(morse_code_list)
-    print(result_string)
+    morse = " ".join(
+            morse_code_dict[char.upper()] if char.upper() in morse_code_dict else char
+            for char in input_string
+        )
+    print(morse)
+    return morse
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    try:
+        string = "".join(sys.argv[1:]) if len(sys.argv) > 1 else "help me@"
+        text_to_morse(string)
+    except AssertionError:
         print("AssertionError: the arguments are bad")
         sys.exit(1)
-    main(sys.argv[1])
