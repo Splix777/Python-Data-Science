@@ -18,19 +18,12 @@ def check_valid_date(month, day, year):
     if year < 1 or year > 9999:
         print("Invalid year")
         return
-    if month == 2:
-        if year % 4 == 0:
-            if day > 29:
-                print("Invalid day for February")
-                return
-        else:
-            if day > 28:
-                print("Invalid day for February")
-                return
-    if month in [4, 6, 9, 11]:
-        if day > 30:
-            print("Invalid day for this month")
-            return
+    if month == 2 and (year % 4 == 0 and day > 29 or year % 4 != 0 and day > 28):
+        print("Invalid day for February")
+        return
+    if month in [4, 6, 9, 11] and day > 30:
+        print("Invalid day for this month")
+        return
 
 
 def calculate_difference(current_time, month, day, year):
