@@ -29,16 +29,16 @@ def give_bmi(
     try:
         # Check if the lists have the same size
         if len(height) != len(weight):
-            raise ValueError("Input lists must have the same size")
+            raise ValueError("user_input lists must have the same size")
 
         # Check if the elements are numeric (int or float)
         if (
             not all(isinstance(h, (int, float)) for h in height) or
             not all(isinstance(w, (int, float)) for w in weight)
         ):
-            raise TypeError("All elements in input lists must be int or float")
+            raise TypeError("All elements in user_input lists must be int or float")
 
-        # Convert input lists to NumPy arrays
+        # Convert user_input lists to NumPy arrays
         height = np.array(height)
         weight = np.array(weight)
 

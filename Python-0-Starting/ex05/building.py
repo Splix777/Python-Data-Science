@@ -1,47 +1,41 @@
-# building.py
-
-import sys
 import string
-from collections import Counter
+import sys
 
 
 def count_characters(text: str) -> None:
-    '''
-    This function counts the number of characters in a text.
-    It also counts the number of upper and lower letters,
-    punctuation marks, spaces and digits.
-    '''
     char_types = {
-        'upper letters': lambda c: c.isupper(),
-        'lower letters': lambda c: c.islower(),
-        'punctuation marks': lambda c: c in string.punctuation,
-        'spaces': lambda c: c.isspace(),
-        'digits': lambda c: c.isdigit(),
+        'upper letters': sum(bool(char.isupper()) for char in text),
+        'lower letters': sum(bool(char.islower()) for char in text),
+        'punctuation marks': sum(char in string.punctuation for char in text),
+        'spaces': sum(bool(char.isspace()) for char in text),
+        'digits': sum(bool(char.isdigit()) for char in text),
     }
 
-    counts = Counter({char_type: sum(map(checker, text))
-                      for char_type, checker in char_types.items()})
     char_count = len(text)
 
     print(f"The text contains {char_count} characters:")
-    for char_type, count in counts.items():
+    for char_type, count in char_types.items():
         print(f"{count} {char_type}")
 
 
-if __name__ == "__main__":
-    try:
+def main():
+    text = ""
+    if len(sys.argv) == 2:
         text = sys.argv[1]
-    except IndexError:
+    elif len(sys.argv) == 1:
         try:
             print("What is the text to count?")
             text = sys.stdin.readline()
-            if not text:
-                print("No text to count. Exiting.")
-                sys.exit(0)
-            count_characters(text)
-        except KeyboardInterrupt as e:
-            print(f'KeyboardInterrupt: {e}')
+        except KeyboardInterrupt:
             sys.exit(1)
+        except EOFError:
+            text.strip()
+
     else:
-        count_characters(text)
-        sys.exit(0)
+        raise AssertionError("More than one argument is provided.")
+
+    count_characters(text)
+
+
+if __name__ == "__main__":
+    main()
