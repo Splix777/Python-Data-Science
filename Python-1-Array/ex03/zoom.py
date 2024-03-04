@@ -1,40 +1,41 @@
 # zoom.py
 
-
 import numpy as np
 import matplotlib.pyplot as plt
+
+from numpy import array as Array
 from load_image import ft_load
 
 
-def main():
-    '''
-    Prints the shape of an image and displays the image
-    it then slices a portion of the image and prints the new shape
-    and displays the new zoomed image
+def zoom_image(
+        image: np.array = ft_load('animal.jpg'),
+        new_shape: tuple = (400, 400, 1),
+        ) -> Array:
+    """
+    Takes in an image and returns a zoomed image
 
     Args:
-    None
+    image: numpy array
+    new_shape: tuple
+    start: tuple
+    end: tuple
 
     Returns:
-    None
-    '''
+    numpy array
+    """
     try:
-        # Load the image
-        image = ft_load('animal.jpg')
-
-        # Check if the image is loaded successfully
         if image is None:
             raise FileNotFoundError(f"Error: File not found - {image}")
 
-        _print_img_info(
+        print_img_info(
             "The shape of image is:",
             image,
             "Original Image")
 
-        # Zoom into the image (slicing a portion)
-        zoomed_image = image[:400, :400, :1]
+        # zoomed_image = image[:400, :400, :1]
+        zoomed_image = image[:new_shape[0], :new_shape[1], :new_shape[2]]
 
-        _print_img_info(
+        print_img_info(
             "New shape after slicing:",
             zoomed_image,
             "Zoomed Image")
@@ -43,8 +44,8 @@ def main():
         print(f"Error: {e}")
 
 
-def _print_img_info(message: str, img: np.array, title: str) -> None:
-    '''
+def print_img_info(message: str, img: np.array, title: str) -> None:
+    """
     Takes in an image and prints its shape and displays the image
 
     Args:
@@ -54,7 +55,7 @@ def _print_img_info(message: str, img: np.array, title: str) -> None:
 
     Returns:
     None
-    '''
+    """
     # Print information about the image
     print(f"{message} {img.shape} or ({img.shape[0]}, {img.shape[1]})")
     print(np.array(img))
@@ -70,4 +71,6 @@ def _print_img_info(message: str, img: np.array, title: str) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    zoom_image()
+    # other_image = ft_load('4k.jpg')
+    # zoom_image(other_image,(400, 400, 1))

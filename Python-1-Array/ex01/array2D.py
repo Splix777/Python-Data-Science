@@ -4,7 +4,7 @@ import numpy as np
 
 
 def slice_me(family: list, start: int, end: int) -> list:
-    '''
+    """
     Takes in a list and two indices and returns a slice of the list
 
     Args:
@@ -23,7 +23,7 @@ def slice_me(family: list, start: int, end: int) -> list:
 
     Output:
     ['Paul', 'George']
-    '''
+    """
     try:
         print(f'My shape is : {np.array(family).shape}')
         print(f'My new shape is : {np.array(family[start:end]).shape}')

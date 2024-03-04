@@ -42,9 +42,11 @@ def give_bmi(
         height = np.array(height)
         weight = np.array(weight)
 
+        # print(f'Height: {height}, Weight: {weight}')
+
         # Check for zero division
-        if (height == 0).any():
-            raise ZeroDivisionError("Height cannot be zero")
+        if (height == 0).any() or (weight == 0).any():
+            raise ZeroDivisionError("Height or Weight cannot be zero")
 
         # Perform BMI calculation
         return np.round(weight / np.square(height), 5).tolist()
@@ -54,7 +56,7 @@ def give_bmi(
 
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
-    '''
+    """
     Takes in a list of BMIs and a limit and returns a list of booleans
 
     Args:
@@ -72,7 +74,7 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
 
     Output:
     [True, True]
-    '''
+    """
     try:
         if bmi and limit:
             # Check if the elements are numeric (int or float)
