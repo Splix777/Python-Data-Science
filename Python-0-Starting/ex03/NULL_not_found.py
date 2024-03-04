@@ -4,7 +4,7 @@ import math
 
 
 def NULL_not_found(object: any) -> int:
-    print(f'{object.__repr__()}')
+    # print(f'{object.__repr__()}')
     if object is None:
         print(f"Nothing: {object} {type(object)}")
     elif isinstance(object, float) and math.isnan(object):
@@ -17,5 +17,4 @@ def NULL_not_found(object: any) -> int:
         print(f"Fake: {object} {type(object)}")
     else:
         print("Type not Found")
-    print('\n')
     return 42
